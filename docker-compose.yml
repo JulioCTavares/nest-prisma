@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  pg-dev:
+    image: postgres:13
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=nest_prisma
+    volumes:
+     - pgdata:/data/postgres
+volumes:
+  pgdata:
+    driver: local
