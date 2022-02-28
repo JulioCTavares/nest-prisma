@@ -12,12 +12,15 @@ datasource db {
 
 model User {
   id         String   @id @default(uuid())
-  email      String
+  email      String   @unique
   password   String
   first_name String?
   last_name  String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  Bookmark Bookmark[]
+  @@map("users")
 }
 
 model Bookmark {
@@ -27,4 +30,9 @@ model Bookmark {
   link        String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("bookmarks")
 }
